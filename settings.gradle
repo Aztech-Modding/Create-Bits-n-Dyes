@@ -1,0 +1,19 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+    }
+}
+
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+}
+
+
+def bitsNBobsBuild = file('../Create-Bits-n-Bobs')
+if (bitsNBobsBuild.exists()) {
+    includeBuild('../Create-Bits-n-Bobs') {
+        dependencySubstitution {
+            substitute module('com.kipti.bnb') using project(':')
+        }
+    }
+}

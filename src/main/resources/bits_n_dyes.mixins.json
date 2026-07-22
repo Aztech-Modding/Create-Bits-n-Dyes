@@ -2,7 +2,10 @@
   "required": true,
   "package": "com.cake.bnd.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [],
+  "mixins": [
+    "create_connected.FluidVesselItemMixin",
+    "create_connected.FluidVesselModelMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },

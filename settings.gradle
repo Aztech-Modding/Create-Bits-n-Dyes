@@ -8,12 +8,13 @@ plugins {
     id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
 }
 
-
+//Parallel build for IDE, note that Bits n Dyes should NOT use bits n bobs content,
+// and should be able to function entirely independently
 def bitsNBobsBuild = file('../Create-Bits-n-Bobs')
 if (bitsNBobsBuild.exists()) {
     includeBuild('../Create-Bits-n-Bobs') {
         dependencySubstitution {
-            substitute module('com.kipti.bnb') using project(':')
+            substitute module('com.kipti.bnb:bnb') using project(':')
         }
     }
 }

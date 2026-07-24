@@ -2,6 +2,7 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'net.neoforged.moddev' version '2.0.142'
+    id 'org.jetbrains.kotlin.jvm' version '2.2.20'
     id 'idea'
 }
 
@@ -73,6 +74,22 @@ repositories {
             includeGroup("dev.ryanhcode.sable")
             includeGroup("dev.ryanhcode.sable-companion")
         }
+    }
+    maven {
+        url "http://maven.dragons.plus/releases" // DragonsPlusMinecraft Maven - Cert expired?!
+        allowInsecureProtocol = true
+    }
+    maven {
+        name "fallensMavenReleases"
+        url "https://maven.fallenbreath.me/releases"
+    }
+    maven {
+        name = "JustEnoughItems page"
+        url = "https://blamejared.com"
+    }
+    maven {
+        name = 'Kotlin for Forge'
+        url = 'https://thedarkcolour.github.io/KotlinForForge/'
     }
 }
 
@@ -177,6 +194,14 @@ dependencies {
 
     // Actual compats here:
     implementation("maven.modrinth:create-connected:${create_connected_version}")
+    implementation("maven.modrinth:slice-and-dice:${create_slice_and_dice_version}")
+    implementation("maven.modrinth:create-sound-of-steam:${create_sound_of_steam_version}")
+    implementation 'thedarkcolour:kotlinforforge-neoforge:5.12.0'
+
+    implementation("plus.dragons.createdragonsplus:create-dragons-plus-${minecraft_version}:${create_dragons_plus_version}")
+    implementation("plus.dragons.createenchantmentindustry:create-enchantment-industry-${minecraft_version}:${create_enchantment_industry_version}")
+
+    runtimeOnly "mezz.jei:jei-1.21.1-neoforge:19.39.0.370"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

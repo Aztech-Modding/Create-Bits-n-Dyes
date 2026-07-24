@@ -5,32 +5,39 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.fml.loading.LoadingModList;
 
 public enum BndMods {
-	CREATE_CONNECTED;
+    CREATE_CONNECTED,
+    CREATE_ENCHANTMENT_INDUSTRY,
+    CREATE_DRAGONS_PLUS, CREATE_SLICE_N_DICE("sliceanddice");
 
-	private final String id;
-	private final boolean isLoaded;
+    private final String id;
+    private final boolean isLoaded;
 
-  BndMods() {
-		id = Lang.asId(name());
-		isLoaded = LoadingModList.get().getModFileById(id) != null;
-	}
+    BndMods() {
+        id = Lang.asId(name());
+        isLoaded = LoadingModList.get().getModFileById(id) != null;
+    }
 
-	/**
-	 * @return the mod id
-	 */
-	public String id() {
-		return id;
-	}
+    BndMods(final String id) {
+        this.id = id;
+        this.isLoaded = LoadingModList.get().getModFileById(id) != null;
+    }
 
-	public ResourceLocation rl(String path) {
-		return ResourceLocation.fromNamespaceAndPath(id, path);
-	}
+    /**
+     * @return the mod id
+     */
+    public String id() {
+        return id;
+    }
 
-	/**
-	 * @return a boolean of whether the mod is loaded or not based on mod id
-	 */
-	public boolean isLoaded() {
-		return isLoaded;
-	}
+    public ResourceLocation asResource(final String path) {
+        return ResourceLocation.fromNamespaceAndPath(id, path);
+    }
+
+    /**
+     * @return a boolean of whether the mod is loaded or not based on mod id
+     */
+    public boolean isLoaded() {
+        return isLoaded;
+    }
 
 }

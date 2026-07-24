@@ -101,6 +101,10 @@ public class FluidVesselModelMixin {
         entry = BndSpriteShifts.CC_DYED_FLUID_CONTAINER_WINDOW_SINGLE.get(color);
         if (entry != null && QuadTransformer.uvWithinSprite(quad, entry.getOriginal())) return entry;
 
+        assert BndSpriteShifts.CEI_DYED_EXPERIENCE_HATCH != null;
+        entry = BndSpriteShifts.CEI_DYED_EXPERIENCE_HATCH.get(color);
+        if (entry != null && QuadTransformer.uvWithinSprite(quad, entry.getOriginal())) return entry;
+
         return null;
     }
 

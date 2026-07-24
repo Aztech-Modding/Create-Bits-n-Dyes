@@ -4,7 +4,13 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "create_connected.FluidVesselItemMixin",
-    "create_connected.FluidVesselModelMixin"
+    "create_connected.FluidVesselModelMixin",
+    "create_dragons_plus.CDPBlocksMixin",
+    "create_enchantment_industry.CEIBlocksMixin",
+    "create_slice_n_dice.SDBlocksMixin",
+    "create_slice_n_dice.SDItemsMixin",
+    "create_slice_n_dice.SprinklerRendererMixin",
+    "create_slice_n_dice.SprinklerVisualMixin"
   ],
   "injectors": {
     "defaultRequire": 1

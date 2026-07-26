@@ -20,12 +20,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class SDItemsMixin {
 
     @Inject(method = "<clinit>", at = @At("HEAD"))
-    private static void azimuth$bootstrapBlockEdits(final CallbackInfo ci) {
+    private static void bnd$bootstrapBlockEdits(final CallbackInfo ci) {
         CreateBlockEdits.bootstrapIfTheBootIsNotStrapped();
     }
 
     @Redirect(method = "<clinit>", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/foundation/data/CreateRegistrate;item(Lcom/tterrag/registrate/util/nullness/NonNullFunction;)Lcom/tterrag/registrate/builders/ItemBuilder;"))
-    private static ItemBuilder azimuth$applyBlockEdits(final CreateRegistrate instance, final NonNullFunction nonNullFunction) {
+    private static ItemBuilder bnd$applyBlockEdits(final CreateRegistrate instance, final NonNullFunction nonNullFunction) {
         return instance.item((NonNullFunction<Item.Properties, Item>) DyeableFloorSprinklerItem::new);
     }
 

@@ -14,11 +14,14 @@ public class CreateBitsnDyes {
     public static final String MOD_ID = "bits_n_dyes";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public CreateBitsnDyes(IEventBus modEventBus, ModContainer modContainer) {
+    public CreateBitsnDyes(final IEventBus modEventBus, final ModContainer modContainer) {
         BndBehaviourApplicators.register();
+
+        LOGGER.info("Bits 'n' Dyes is present!");
+        LOGGER.info("Sorry for the disruption if any, I do poke around with other mods a little more than my big sister");
     }
 
-    public static ResourceLocation asResource(String path) {
+    public static ResourceLocation asResource(final String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 

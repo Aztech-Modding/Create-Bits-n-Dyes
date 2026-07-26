@@ -3,14 +3,28 @@
   "package": "com.cake.bnd.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "create.hose_pulley.AbstractPulleyRendererMixin",
+    "create.hose_pulley.AbstractPulleyVisualMixin",
+    "create.hose_pulley.HosePulleyVisualMixin",
+    "create.portable_fluid_interface.PIInstanceMixin",
+    "create.portable_fluid_interface.PortableStorageInterfaceRendererMixin",
+    "create.portable_fluid_interface.PSIActorVisualMixin",
+    "create.portable_fluid_interface.PSIVisualMixin",
+    "create_aeronautics.AeroBlocksMixin",
+    "create_aeronautics.MountedPotatoCannonRendererMixin",
+    "create_connected.FluidTankRendererMixin",
     "create_connected.FluidVesselItemMixin",
     "create_connected.FluidVesselModelMixin",
     "create_dragons_plus.CDPBlocksMixin",
+    "create_electro_energetics.CEEBlocksMixin",
     "create_enchantment_industry.CEIBlocksMixin",
+    "create_slice_n_dice.MovingSprinklerBehaviourMixin",
     "create_slice_n_dice.SDBlocksMixin",
     "create_slice_n_dice.SDItemsMixin",
+    "create_slice_n_dice.SprinklerRendererCompanionMixin",
     "create_slice_n_dice.SprinklerRendererMixin",
-    "create_slice_n_dice.SprinklerVisualMixin"
+    "create_slice_n_dice.SprinklerVisualFactoryMixin",
+    "sound_of_steam.SoundOfSteamAllBlocksMixin"
   ],
   "injectors": {
     "defaultRequire": 1

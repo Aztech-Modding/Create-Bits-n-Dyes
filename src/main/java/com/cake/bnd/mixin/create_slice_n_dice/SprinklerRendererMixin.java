@@ -1,6 +1,7 @@
 package com.cake.bnd.mixin.create_slice_n_dice;
 
 import com.cake.bnd.registry.client.BndSpriteShifts;
+import com.kipti.bnb.content.decoration.dyeable.simple.SimpleDyeableBehaviour;
 import com.kipti.bnb.content.decoration.dyeable.simple.SimpleDyeablePartialHelper;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -31,7 +32,7 @@ public class SprinklerRendererMixin {
             target = "Lcom/possible_triangle/sliceanddice/block/sprinkler/SprinklerRenderer$Companion;floorRender$default(Lcom/possible_triangle/sliceanddice/block/sprinkler/SprinklerRenderer$Companion;Lcom/possible_triangle/sliceanddice/block/sprinkler/behaviour/SprinklerBehaviour;Lnet/minecraft/world/level/Level;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILkotlin/jvm/functions/Function1;ILjava/lang/Object;)V"
         )
     )
-    private void bnb$applyFluidValvePointerDye(
+    private void bnb$applySprinklerDye(
         final SprinklerRenderer.Companion companion,
         final SprinklerBehaviour behaviour,
         final Level level,
@@ -50,7 +51,7 @@ public class SprinklerRendererMixin {
             final SuperByteBuffer headRender = SimpleDyeablePartialHelper.partial(
                 SDPartials.FLOOR_SPRINKLER_HEAD,
                 SDBlocks.SPRINKLER.getDefaultState(),
-                SimpleDyeablePartialHelper.getColor(blockEntity),
+                SimpleDyeableBehaviour.getDyeColor(blockEntity),
                 BndSpriteShifts.CSND_DYED_FLOOR_SPRINKLER
             );
 //            block.invoke(headRender); Never supplied for normal block rendering, only for contraptions

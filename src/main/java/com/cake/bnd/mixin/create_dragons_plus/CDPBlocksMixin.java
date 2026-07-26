@@ -23,15 +23,15 @@ import java.util.function.Consumer;
 public class CDPBlocksMixin {
 
     @Inject(method = "<clinit>", at = @At("HEAD"))
-    private static void azimuth$bootstrapBlockEdits(final CallbackInfo ci) {
+    private static void bnd$bootstrapBlockEdits(final CallbackInfo ci) {
         CreateBlockEdits.bootstrapIfTheBootIsNotStrapped();
     }
 
     @WrapOperation(method = "<clinit>", at = @At(value = "INVOKE", target = "Lplus/dragons/createdragonsplus/common/CDPRegistrate;block(Ljava/lang/String;Lcom/tterrag/registrate/util/nullness/NonNullFunction;)Lcom/tterrag/registrate/builders/BlockBuilder;"))
-    private static BlockBuilder azimuth$applyBlockEdits(final CDPRegistrate instance,
-                                                        final String s,
-                                                        final NonNullFunction nonNullFunction,
-                                                        final Operation<BlockBuilder> original) {
+    private static BlockBuilder bnd$applyBlockEdits(final CDPRegistrate instance,
+                                                    final String s,
+                                                    final NonNullFunction nonNullFunction,
+                                                    final Operation<BlockBuilder> original) {
         final BlockBuilder builder = original.call(instance, s, nonNullFunction);
 
         final Consumer<BlockBuilder<?, CreateRegistrate>> transform =

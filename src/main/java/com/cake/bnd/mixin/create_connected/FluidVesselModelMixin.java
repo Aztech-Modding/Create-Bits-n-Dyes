@@ -78,6 +78,9 @@ public class FluidVesselModelMixin {
     private static SpriteShiftEntry bnd$findShiftEntry(final BakedQuad quad, final DyeColor color) {
         SpriteShiftEntry entry;
 
+        entry = BndSpriteShifts.DYED_FLUID_TANK.get(color);
+        if (entry != null && QuadTransformer.uvWithinSprite(quad, entry.getOriginal())) return entry;
+
         entry = BnbSpriteShifts.DYED_FLUID_TANK_CONNECTED.get(color);
         if (entry != null && QuadTransformer.uvWithinSprite(quad, entry.getOriginal())) return entry;
 
@@ -87,8 +90,8 @@ public class FluidVesselModelMixin {
         entry = BnbSpriteShifts.DYED_FLUID_TANK_INNER_CONNECTED.get(color);
         if (entry != null && QuadTransformer.uvWithinSprite(quad, entry.getOriginal())) return entry;
 
-//        entry = BnbSpriteShifts.DYED_FLUID_TANK_WINDOW.get(color);
-//        if (entry != null && QuadTransformer.uvWithinSprite(quad, entry.getOriginal())) return entry;
+        entry = BnbSpriteShifts.DYED_FLUID_TANK_WINDOW.get(color);
+        if (entry != null && QuadTransformer.uvWithinSprite(quad, entry.getOriginal())) return entry;
 
         entry = BnbSpriteShifts.DYED_FLUID_TANK_WINDOW_SINGLE.get(color);
         if (entry != null && QuadTransformer.uvWithinSprite(quad, entry.getOriginal())) return entry;

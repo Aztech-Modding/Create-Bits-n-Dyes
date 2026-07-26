@@ -7,7 +7,11 @@ import net.neoforged.fml.loading.LoadingModList;
 public enum BndMods {
     CREATE_CONNECTED,
     CREATE_ENCHANTMENT_INDUSTRY,
-    CREATE_DRAGONS_PLUS, CREATE_SLICE_N_DICE("sliceanddice");
+    CREATE_DRAGONS_PLUS,
+    CREATE_SLICE_N_DICE("sliceanddice"),
+    CREATE_SOUND_OF_STEAM("pipeorgans"),
+    CREATE_AERONAUTICS("aeronautics"),
+    CREATE_ELECTRO_ENERGETICS("electroenergetics");
 
     private final String id;
     private final boolean isLoaded;

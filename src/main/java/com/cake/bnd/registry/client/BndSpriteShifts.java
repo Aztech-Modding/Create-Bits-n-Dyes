@@ -19,6 +19,21 @@ import java.util.Map;
 
 public class BndSpriteShifts {
 
+    public static final Map<DyeColor, SpriteShiftEntry> DYED_FLUID_TANK = getDyedSpriteShifts(
+        "fluid_tank",
+        "create/fluid_tank"
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> DYED_COPPER_REDSTONE_PLATE = getDyedSpriteShifts(
+        "copper_redstone_plate",
+        "create/copper_redstone_plate"
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> DYED_COPPER_REDSTONE_PLATE_POWERED = getDyedSpriteShifts(
+        "copper_redstone_plate_powered",
+        "create/copper_redstone_plate_powered"
+    );
+
     public static final Map<DyeColor, SpriteShiftEntry> DYED_COPPER_UNDERSIDE = getDyedSpriteShifts(
         "copper_underside",
         "create/copper_underside"
@@ -42,6 +57,11 @@ public class BndSpriteShifts {
     public static final Map<DyeColor, SpriteShiftEntry> DYED_ITEM_DRAIN_SIDE = getDyedSpriteShifts(
         "item_drain_side",
         "create/item_drain_side"
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> DYED_PORTABLE_FLUID_INTERFACE = getDyedSpriteShifts(
+        "portable_fluid_interface",
+        "create/portable_fluid_interface"
     );
 
     public static final Map<DyeColor, SpriteShiftEntry> DYED_SPOUT = getDyedSpriteShifts(
@@ -138,10 +158,58 @@ public class BndSpriteShifts {
         BndMods.CREATE_SLICE_N_DICE
     );
 
+    public static final Map<DyeColor, SpriteShiftEntry> CSOS_DYED_COPPER_REDSTONE_PLATE_POWERED = getDyedSpriteShiftsIfModInstalled(
+        "pipeorgans",
+        "copper_redstone_plate_powered",
+        "create/copper_redstone_plate_powered",
+        BndMods.CREATE_SOUND_OF_STEAM
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> CSOS_DYED_STEAM_ENGINE = getDyedSpriteShiftsIfModInstalled(
+        "pipeorgans",
+        "engine",
+        "bits_n_bobs",
+        "dyed_steam_engine",
+        BndMods.CREATE_SOUND_OF_STEAM
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> CA_DYED_POTATO_CANNON_1 = getDyedSpriteShiftsIfModInstalled(
+        "aeronautics",
+        "mounted_potato_cannon/mounted_potato_cannon_1",
+        "create_aeronautics/mounted_potato_cannon_1",
+        BndMods.CREATE_AERONAUTICS
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> CA_DYED_POTATO_CANNON_2 = getDyedSpriteShiftsIfModInstalled(
+        "aeronautics",
+        "mounted_potato_cannon/mounted_potato_cannon_2",
+        "create_aeronautics/mounted_potato_cannon_2",
+        BndMods.CREATE_AERONAUTICS
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> CA_DYED_STEAM_VENT_BASE = getDyedSpriteShiftsIfModInstalled(
+        "aeronautics",
+        "steam_vent/steam_vent_base",
+        "create_aeronautics/steam_vent_base",
+        BndMods.CREATE_AERONAUTICS
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> CEE_DYED_ELECTRICAL_PUMP = getDyedSpriteShiftsIfModInstalled(
+        "electroenergetics",
+        "electrical_pump",
+        "create_electro_energetics/electrical_pump",
+        BndMods.CREATE_ELECTRO_ENERGETICS
+    );
+
     public static Map<DyeColor, SpriteShiftEntry> getDyedSpriteShifts(
         final String sourceTexture,
         final String targetFolder) {
-        return getDyeColorSpriteShiftEntryMap("create", sourceTexture, targetFolder);
+        return getDyeColorSpriteShiftEntryMap(
+            "create",
+            sourceTexture,
+            CreateBitsnDyes.MOD_ID,
+            targetFolder
+        );
     }
 
     public static Map<DyeColor, SpriteShiftEntry> getDyedSpriteShiftsIfModInstalled(
@@ -149,19 +217,35 @@ public class BndSpriteShifts {
         final String sourceTexture,
         final String targetFolder,
         final BndMods otherMod) {
+        return getDyedSpriteShiftsIfModInstalled(
+            sourceNamespace,
+            sourceTexture,
+            CreateBitsnDyes.MOD_ID,
+            targetFolder,
+            otherMod
+        );
+    }
+
+    public static Map<DyeColor, SpriteShiftEntry> getDyedSpriteShiftsIfModInstalled(
+        final String sourceNamespace,
+        final String sourceTexture,
+        final String targetNamespace,
+        final String targetFolder,
+        final BndMods otherMod) {
         if (!otherMod.isLoaded()) return null;
 
-        return getDyeColorSpriteShiftEntryMap(sourceNamespace, sourceTexture, targetFolder);
+        return getDyeColorSpriteShiftEntryMap(sourceNamespace, sourceTexture, targetNamespace, targetFolder);
     }
 
     @NotNull
-    private static Map<DyeColor, SpriteShiftEntry> getDyeColorSpriteShiftEntryMap(final String sourceNamespace, final String sourceTexture, final String targetFolder) {
+    private static Map<DyeColor, SpriteShiftEntry> getDyeColorSpriteShiftEntryMap(final String sourceNamespace, final String sourceTexture, final String targetNamespace, final String targetFolder) {
         final Map<DyeColor, SpriteShiftEntry> map = new EnumMap<>(DyeColor.class);
+        final String textureName = sourceTexture.substring(sourceTexture.lastIndexOf('/') + 1);
         for (final DyeColor color : DyeColor.values()) {
             map.put(
                 color, SpriteShifter.get(
                     ResourceLocation.fromNamespaceAndPath(sourceNamespace, "block/" + sourceTexture),
-                    CreateBitsnDyes.asResource("block/" + targetFolder + "/" + sourceTexture + "_" + color.getName())
+                    ResourceLocation.fromNamespaceAndPath(targetNamespace, "block/" + targetFolder + "/" + textureName + "_" + color.getName())
                 )
             );
         }

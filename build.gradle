@@ -34,6 +34,10 @@ repositories {
         name = 'azmod-maven'
         url = "https://maven.azmod.net/releases"
     }
+    maven {
+        name "RyanHCode Maven"
+        url "https://maven.ryanhcode.dev/releases"
+    }
     exclusiveContent {
         forRepository {
             maven {
@@ -91,6 +95,7 @@ repositories {
         name = 'Kotlin for Forge'
         url = 'https://thedarkcolour.github.io/KotlinForForge/'
     }
+    maven { url = "https://maven.theillusivec4.top/" } // Curios API
 }
 
 base {
@@ -196,10 +201,16 @@ dependencies {
     implementation("maven.modrinth:create-connected:${create_connected_version}")
     implementation("maven.modrinth:slice-and-dice:${create_slice_and_dice_version}")
     implementation("maven.modrinth:create-sound-of-steam:${create_sound_of_steam_version}")
+    implementation("maven.modrinth:create-electro-energetics:${create_electro_energetics_version}")
     implementation 'thedarkcolour:kotlinforforge-neoforge:5.12.0'
 
     implementation("plus.dragons.createdragonsplus:create-dragons-plus-${minecraft_version}:${create_dragons_plus_version}")
     implementation("plus.dragons.createenchantmentindustry:create-enchantment-industry-${minecraft_version}:${create_enchantment_industry_version}")
+
+    implementation "dev.eriksonn.aeronautics:aeronautics-neoforge-1.21.1:$aeronautics_version"
+    implementation "dev.simulated_team.simulated:simulated-neoforge-1.21.1:$simulated_version"
+    implementation "dev.ryanhcode.sable:sable-neoforge-1.21.1:$sable_version"
+    implementation "dev.ryanhcode.offroad:offroad-neoforge-1.21.1:$offroad_version"
 
     runtimeOnly "mezz.jei:jei-1.21.1-neoforge:19.39.0.370"
 }

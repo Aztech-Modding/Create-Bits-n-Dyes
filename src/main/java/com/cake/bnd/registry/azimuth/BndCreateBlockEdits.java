@@ -152,7 +152,7 @@ public class BndCreateBlockEdits {
         event.forBlock(
             id,
             builder -> ((BlockBuilder<Block, CreateRegistrate>) builder).onRegister(CreateRegistrate.blockModel(
-                () -> (m) -> new SimpleDyeableModelWrapper(m, dyedSpriteShifts)))
+                () -> SimpleDyeableModelWrapper.wrap(dyedSpriteShifts)))
         );
     }
 
@@ -161,8 +161,7 @@ public class BndCreateBlockEdits {
             event.forBlock(
                 location,
                 builder -> ((BlockBuilder<Block, CreateRegistrate>) builder).onRegister(CreateRegistrate.blockModel(
-                    () -> (m) -> new SimpleDyeableModelWrapper(
-                        m,
+                    () -> SimpleDyeableModelWrapper.wrap(
                         BndSpriteShifts.DYED_COPPER_REDSTONE_PLATE,
                         BndSpriteShifts.CSOS_DYED_COPPER_REDSTONE_PLATE_POWERED,
                         BndSpriteShifts.CSOS_DYED_STEAM_ENGINE

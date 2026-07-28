@@ -195,7 +195,7 @@ dependencies {
     runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}")
     implementation("com.tterrag.registrate:Registrate:${registrate_version}")
 
-    implementation("com.cake.autoload:autoload-neoforge-1.21.1:1.+")
+    //implementation("com.cake.autoload:autoload-neoforge-1.21.1:1.+")
 
     // Actual compats here:
     implementation("maven.modrinth:create-connected:${create_connected_version}")

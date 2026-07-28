@@ -18,3 +18,12 @@ if (bitsNBobsBuild.exists()) {
         }
     }
 }
+
+def azimuthBuild = file('../Azimuth')
+if (azimuthBuild.exists()) {
+    includeBuild('../Azimuth') {
+        dependencySubstitution {
+            substitute module('com.cake.azimuth:azimuth') using project(':')
+        }
+    }
+}

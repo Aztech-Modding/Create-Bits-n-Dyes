@@ -44,10 +44,12 @@ repositories {
                 name = 'azmod-modmaven-mirror'
                 url = "https://maven.azmod.net/modmaven"
 
-                //Credentials purely required for adding new mods to cache, you will still be able to get stuff from modmaven itself / existing cache.
-                credentials {
-                    username = findProperty('azmodMavenUser') ?: System.getenv('AZMOD_MAVEN_USER')
-                    password = findProperty('azmodMavenToken') ?: System.getenv('AZMOD_MAVEN_PASSWORD')
+                if (findProperty('azmodMavenUser') != null) {
+                    //Credentials purely required for adding new mods to cache, you will still be able to get stuff from modmaven itself / existing cache.
+                    credentials {
+                        username = findProperty('azmodMavenUser') ?: System.getenv('AZMOD_MAVEN_USER')
+                        password = findProperty('azmodMavenToken') ?: System.getenv('AZMOD_MAVEN_PASSWORD')
+                    }
                 }
             }
         }

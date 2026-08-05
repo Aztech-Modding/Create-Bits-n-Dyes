@@ -2,11 +2,6 @@ package com.cake.bnd.registry.client;
 
 import com.cake.bnd.CreateBitsnDyes;
 import com.cake.bnd.foundation.BndMods;
-import com.kipti.bnb.CreateBitsnBobs;
-import com.simibubi.create.foundation.block.connected.AllCTTypes;
-import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
-import com.simibubi.create.foundation.block.connected.CTSpriteShifter;
-import com.simibubi.create.foundation.block.connected.CTType;
 import net.createmod.catnip.render.SpriteShiftEntry;
 import net.createmod.catnip.render.SpriteShifter;
 import net.minecraft.resources.ResourceLocation;
@@ -18,6 +13,23 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class BndSpriteShifts {
+
+    public static final Map<BndMods, String> DIRECTORY_TO_LOAD_FOR_MOD = Map.of(
+            BndMods.CREATE,
+            "block_shift/create",
+            BndMods.CREATE_AERONAUTICS,
+            "block_shift/create_aeronauticus",
+            BndMods.CREATE_CONNECTED,
+            "block_shift/create_connected",
+            BndMods.CREATE_DRAGONS_PLUS,
+            "block_shift/create_dragons_plus",
+            BndMods.CREATE_ELECTRO_ENERGETICS,
+            "block_shift/create_electro_energetics",
+            BndMods.CREATE_ENCHANTMENT_INDUSTRY,
+            "block_shift/create_enchantment_industry",
+            BndMods.CREATE_SLICE_N_DICE,
+            "block_shift/create_slice_n_dice"
+    );
 
     public static final Map<DyeColor, SpriteShiftEntry> DYED_FLUID_TANK = getDyedSpriteShifts(
         "fluid_tank",
@@ -245,39 +257,11 @@ public class BndSpriteShifts {
             map.put(
                 color, SpriteShifter.get(
                     ResourceLocation.fromNamespaceAndPath(sourceNamespace, "block/" + sourceTexture),
-                    ResourceLocation.fromNamespaceAndPath(targetNamespace, "block/" + targetFolder + "/" + textureName + "_" + color.getName())
+                    ResourceLocation.fromNamespaceAndPath(targetNamespace, "block_shift/" + targetFolder + "/" + textureName + "_" + color.getName())
                 )
             );
         }
         return Collections.unmodifiableMap(map);
-    }
-
-    private static CTSpriteShiftEntry omni(final String name) {
-        return getCT(AllCTTypes.OMNIDIRECTIONAL, name);
-    }
-
-    private static CTSpriteShiftEntry vertical(final String name) {
-        return getCT(AllCTTypes.VERTICAL, name);
-    }
-
-    private static CTSpriteShiftEntry getCT(final CTType type,
-                                            final String blockTextureName,
-                                            final String connectedTextureName) {
-        return CTSpriteShifter.getCT(
-            type, CreateBitsnBobs.asResource("block/" + blockTextureName),
-            CreateBitsnBobs.asResource("block/" + connectedTextureName + "_connected")
-        );
-    }
-
-    private static CTSpriteShiftEntry getCT(final CTType type, final String blockTextureName) {
-        return getCT(type, blockTextureName, blockTextureName);
-    }
-
-    private static SpriteShiftEntry get(final String originalLocation, final String targetLocation) {
-        return SpriteShifter.get(
-            CreateBitsnBobs.asResource(originalLocation),
-            CreateBitsnBobs.asResource(targetLocation)
-        );
     }
 
     public static void register() {

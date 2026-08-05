@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.fml.loading.LoadingModList;
 
 public enum BndMods {
+    CREATE, //Assumed to always be loaded, just helpful for schema consistency
     CREATE_CONNECTED,
     CREATE_ENCHANTMENT_INDUSTRY,
     CREATE_DRAGONS_PLUS,

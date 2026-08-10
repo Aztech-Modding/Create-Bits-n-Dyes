@@ -1,9 +1,12 @@
+import org.gradle.util.VersionNumber
+
 plugins {
     id 'java-library'
     id 'maven-publish'
     id 'net.neoforged.moddev' version '2.0.142'
     id 'org.jetbrains.kotlin.jvm' version '2.2.20'
     id 'idea'
+    id 'me.modmuss50.mod-publish-plugin' version '2.1.1'
 }
 
 tasks.named('wrapper', Wrapper).configure {
@@ -264,5 +267,82 @@ idea {
     module {
         downloadSources = true
         downloadJavadoc = true
+    }
+}
+
+// ========================
+// Changelog & Publishing
+// ========================
+String getRelevantChangelog(String targetVersion) {
+    def changelogFile = file("changelog.md")
+    if (!changelogFile.exists()) {
+        return "No changelog found."
+    }
+    def lines = changelogFile.readLines()
+    def result = new StringBuilder()
+    def capturing = false
+    def targetMinecraftVersion = targetVersion.split("-")[0]
+    def targetModVersion = targetVersion.split("-").length > 1 ? targetVersion.split("-")[1] : ""
+    def newerVersionsExist = false
+    for (line in lines) {
+        if (line.startsWith("# ")) {
+            if (capturing) {
+                break
+            }
+            def versionTag = line.substring(2).trim()
+            def entryMinecraftVersion = versionTag.split("-")[0]
+            def entryModVersion = versionTag.split("-").length > 1 ? versionTag.split("-")[1] : ""
+            if (versionTag == targetVersion) {
+                capturing = true
+                continue
+            }
+            if (entryMinecraftVersion == targetMinecraftVersion &&
+                    VersionNumber.parse(entryModVersion) > VersionNumber.parse(targetModVersion)) {
+                newerVersionsExist = true
+            }
+        } else if (capturing && line.trim()) {
+            result.append(line).append("\n")
+        }
+    }
+    if (newerVersionsExist) {
+        println("WARNING: Publishing an older version! Newer entries exist for Minecraft ${targetMinecraftVersion}.")
+    }
+    return result.length() > 0 ? result.toString().trim() : "No changelog entry found for version ${targetVersion}."
+}
+publishMods {
+    file = jar.archiveFile
+    def changelogText = getRelevantChangelog(minecraft_version + "-" + mod_version)
+    changelog = changelogText
+    type = STABLE
+    modLoaders.add("neoforge")
+    displayName = "${mod_name} BETA ${mod_version} NeoForge ${minecraft_version}"
+    curseforge {
+        projectId = "1646822"
+        projectSlug = "create-bits-n-dyes"
+        accessToken = findProperty('curseforgePublishToken')
+        minecraftVersions.add("1.21.1")
+        requires("create")
+        requires("azimuth-api")
+        requires("create-bits-n-bobs")
+        client = true
+        server = true
+    }
+    modrinth {
+        projectId = "nx0pZCi6"
+        accessToken = findProperty('modrinthPublishToken')
+        minecraftVersions.add("1.21.1")
+        requires("create")
+        requires("azimuth-api")
+        requires("create-bits-n-bobs")
+    }
+    discord {
+        webhookUrl = findProperty('aztechDiscordPublishWebhook')
+        username = "bits n dyes version bot"
+        avatarUrl = "https://cataas.com/cat?width=500&height=500"
+        content = """
+        # New Mod Release: ${getDisplayName().get()}
+        ${changelogText}
+        """.trim()
+        style { look = "CLASSIC" }
     }
 }

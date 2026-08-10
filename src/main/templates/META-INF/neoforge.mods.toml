@@ -9,7 +9,7 @@ version="${mod_version}"
 displayName="${mod_name}"
 #updateJSONURL="https://change.me.example.invalid/updates.json"
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/"
-#logoFile="examplemod.png"
+logoFile="logo.png"
 #credits=""
 authors="Cake, Kipti"
 description='''
@@ -44,7 +44,7 @@ config="${mod_id}.mixins.json"
 [[dependencies.${mod_id}]]
     modId="bits_n_bobs"
     type="required"
-    versionRange="[2.1.13-beta,)"
+    versionRange="[2.2.0,)"
     ordering="AFTER"
     side="BOTH"
 

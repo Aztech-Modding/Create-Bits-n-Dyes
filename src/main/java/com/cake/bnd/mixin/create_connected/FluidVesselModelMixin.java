@@ -24,13 +24,28 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @Mixin(FluidVesselModel.class)
 public class FluidVesselModelMixin {
 
     @Unique
     private static final ModelProperty<DyeColor> BNB_TANK_DYE_COLOR = new ModelProperty<>();
+
+    @Unique
+    private static final List<Map<DyeColor, SpriteShiftEntry>> BND_VESSEL_SHIFTS = Arrays.asList(
+        BndSpriteShifts.DYED_FLUID_TANK,
+        BnbSpriteShifts.DYED_FLUID_TANK_CONNECTED,
+        BnbSpriteShifts.DYED_FLUID_TANK_TOP_CONNECTED,
+        BnbSpriteShifts.DYED_FLUID_TANK_INNER_CONNECTED,
+        BnbSpriteShifts.DYED_FLUID_TANK_WINDOW,
+        BnbSpriteShifts.DYED_FLUID_TANK_WINDOW_SINGLE,
+        BndSpriteShifts.CC_DYED_FLUID_CONTAINER_WINDOW,
+        BndSpriteShifts.CC_DYED_FLUID_CONTAINER_WINDOW_SINGLE,
+        BndSpriteShifts.CEI_DYED_EXPERIENCE_HATCH
+    );
 
     @Inject(method = "gatherModelData", at = @At("TAIL"))
     private void bnd$gatherDyeColor(
@@ -76,38 +91,15 @@ public class FluidVesselModelMixin {
 
     @Unique
     private static SpriteShiftEntry bnd$findShiftEntry(final BakedQuad quad, final DyeColor color) {
-        SpriteShiftEntry entry;
-
-        entry = BndSpriteShifts.DYED_FLUID_TANK.get(color);
-        if (entry != null && QuadTransformer.uvWithinSprite(quad, entry.getOriginal())) return entry;
-
-        entry = BnbSpriteShifts.DYED_FLUID_TANK_CONNECTED.get(color);
-        if (entry != null && QuadTransformer.uvWithinSprite(quad, entry.getOriginal())) return entry;
-
-        entry = BnbSpriteShifts.DYED_FLUID_TANK_TOP_CONNECTED.get(color);
-        if (entry != null && QuadTransformer.uvWithinSprite(quad, entry.getOriginal())) return entry;
-
-        entry = BnbSpriteShifts.DYED_FLUID_TANK_INNER_CONNECTED.get(color);
-        if (entry != null && QuadTransformer.uvWithinSprite(quad, entry.getOriginal())) return entry;
-
-        entry = BnbSpriteShifts.DYED_FLUID_TANK_WINDOW.get(color);
-        if (entry != null && QuadTransformer.uvWithinSprite(quad, entry.getOriginal())) return entry;
-
-        entry = BnbSpriteShifts.DYED_FLUID_TANK_WINDOW_SINGLE.get(color);
-        if (entry != null && QuadTransformer.uvWithinSprite(quad, entry.getOriginal())) return entry;
-
-        assert BndSpriteShifts.CC_DYED_FLUID_CONTAINER_WINDOW != null;
-        entry = BndSpriteShifts.CC_DYED_FLUID_CONTAINER_WINDOW.get(color);
-        if (entry != null && QuadTransformer.uvWithinSprite(quad, entry.getOriginal())) return entry;
-
-        assert BndSpriteShifts.CC_DYED_FLUID_CONTAINER_WINDOW_SINGLE != null;
-        entry = BndSpriteShifts.CC_DYED_FLUID_CONTAINER_WINDOW_SINGLE.get(color);
-        if (entry != null && QuadTransformer.uvWithinSprite(quad, entry.getOriginal())) return entry;
-
-        assert BndSpriteShifts.CEI_DYED_EXPERIENCE_HATCH != null;
-        entry = BndSpriteShifts.CEI_DYED_EXPERIENCE_HATCH.get(color);
-        if (entry != null && QuadTransformer.uvWithinSprite(quad, entry.getOriginal())) return entry;
-
+        for (final Map<DyeColor, SpriteShiftEntry> shifts : BND_VESSEL_SHIFTS) {
+            if (shifts == null) {
+                continue;
+            }
+            final SpriteShiftEntry entry = shifts.get(color);
+            if (entry != null && QuadTransformer.uvWithinSprite(quad, entry.getOriginal())) {
+                return entry;
+            }
+        }
         return null;
     }
 

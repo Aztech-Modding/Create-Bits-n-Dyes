@@ -2,9 +2,11 @@ package com.cake.bnd.registry.azimuth;
 
 import com.cake.azimuth.registration.BehaviourApplicators;
 import com.cake.bnd.foundation.BndMods;
+import com.cake.bnd.foundation.create_vault.DyeableVaultBehaviour;
 import com.finchy.pipeorgans.init.AllBlockEntities;
 import com.george_vi.electroenergetics.CEEBlockEntityTypes;
 import com.hlysine.create_connected.registries.CCBlockEntityTypes;
+import com.kipti.bnb.content.decoration.dyeable.DyeableMultiblockTypes;
 import com.kipti.bnb.content.decoration.dyeable.simple.SimpleDyeableBehaviour;
 import com.kipti.bnb.content.decoration.dyeable.tanks.DyeableTankBehaviour;
 import com.kipti.bnb.content.kinetics.cogwheel_chain.behaviour.CogwheelChainBehaviour;
@@ -22,6 +24,7 @@ import java.util.function.Supplier;
 public class BndBehaviourApplicators {
 
     public static void register() {
+        DyeableMultiblockTypes.register(DyeableVaultBehaviour.TYPE);
         BehaviourApplicators.register(be -> {
             if (CogwheelChainCandidate.isValidCandidate(be.getBlockState())) {
                 return List.of(new CogwheelChainBehaviour(be));
@@ -46,12 +49,20 @@ public class BndBehaviourApplicators {
             AllBlockEntityTypes.STEAM_WHISTLE,
             AllBlockEntityTypes.PORTABLE_FLUID_INTERFACE
         );
+        BehaviourApplicators.registerForType(
+            AllBlockEntityTypes.ITEM_VAULT,
+            be -> List.of(new DyeableVaultBehaviour(be))
+        );
     }
 
     private static void registerForCreateConnected() {
         BehaviourApplicators.registerForType(
             CCBlockEntityTypes.FLUID_VESSEL,
             be -> List.of(new DyeableTankBehaviour(be))
+        );
+        BehaviourApplicators.registerForType(
+            CCBlockEntityTypes.ITEM_SILO,
+            be -> List.of(new DyeableVaultBehaviour(be))
         );
     }
 

@@ -315,7 +315,7 @@ publishMods {
     changelog = changelogText
     type = STABLE
     modLoaders.add("neoforge")
-    displayName = "${mod_name} BETA ${mod_version} NeoForge ${minecraft_version}"
+    displayName = "${mod_name} ${mod_version} NeoForge ${minecraft_version}"
     curseforge {
         projectId = "1646822"
         projectSlug = "create-bits-n-dyes"

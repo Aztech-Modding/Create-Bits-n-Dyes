@@ -1,0 +1,8 @@
+colors=(black gray light_gray white brown red orange yellow lime green cyan light_blue blue purple magenta pink)
+
+for i in 0; do
+  n=1
+  src=Vault_Pallete_2_.png
+  dst=Vault_Pallete_2_/home/sam/.dircolors.png
+  [ -f  ] && mv -v  
+done

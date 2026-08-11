@@ -13,3 +13,7 @@
 # 1.21.1-1.0.3
 
 - Added logo
+
+# 1.21.1-1.0.4
+
+- Added vault dye capability (Including compat for Create: Connected)

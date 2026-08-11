@@ -36,6 +36,66 @@ public class BndSpriteShifts {
         "create/fluid_tank"
     );
 
+    public static final Map<DyeColor, SpriteShiftEntry> DYED_ITEM_VAULT_BOTTOM_SMALL = getDyedSpriteShifts(
+        "vault/vault_bottom_small",
+        "create/vault_bottom_small"
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> DYED_ITEM_VAULT_BOTTOM_MEDIUM = getDyedSpriteShifts(
+        "vault/vault_bottom_medium",
+        "create/vault_bottom_medium"
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> DYED_ITEM_VAULT_BOTTOM_LARGE = getDyedSpriteShifts(
+        "vault/vault_bottom_large",
+        "create/vault_bottom_large"
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> DYED_ITEM_VAULT_FRONT_SMALL = getDyedSpriteShifts(
+        "vault/vault_front_small",
+        "create/vault_front_small"
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> DYED_ITEM_VAULT_FRONT_MEDIUM = getDyedSpriteShifts(
+        "vault/vault_front_medium",
+        "create/vault_front_medium"
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> DYED_ITEM_VAULT_FRONT_LARGE = getDyedSpriteShifts(
+        "vault/vault_front_large",
+        "create/vault_front_large"
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> DYED_ITEM_VAULT_SIDE_SMALL = getDyedSpriteShifts(
+        "vault/vault_side_small",
+        "create/vault_side_small"
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> DYED_ITEM_VAULT_SIDE_MEDIUM = getDyedSpriteShifts(
+        "vault/vault_side_medium",
+        "create/vault_side_medium"
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> DYED_ITEM_VAULT_SIDE_LARGE = getDyedSpriteShifts(
+        "vault/vault_side_large",
+        "create/vault_side_large"
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> DYED_ITEM_VAULT_TOP_SMALL = getDyedSpriteShifts(
+        "vault/vault_top_small",
+        "create/vault_top_small"
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> DYED_ITEM_VAULT_TOP_MEDIUM = getDyedSpriteShifts(
+        "vault/vault_top_medium",
+        "create/vault_top_medium"
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> DYED_ITEM_VAULT_TOP_LARGE = getDyedSpriteShifts(
+        "vault/vault_top_large",
+        "create/vault_top_large"
+    );
+
     public static final Map<DyeColor, SpriteShiftEntry> DYED_COPPER_REDSTONE_PLATE = getDyedSpriteShifts(
         "copper_redstone_plate",
         "create/copper_redstone_plate"

@@ -9,3 +9,7 @@
   - Create: Electro Energetics
   - Create: Enchantment Industry (+ Dragons Plus)
   - Create: Aeronautics
+
+# 1.21.1-1.0.3
+
+- Added logo

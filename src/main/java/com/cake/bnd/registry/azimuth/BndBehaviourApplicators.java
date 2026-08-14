@@ -2,18 +2,20 @@ package com.cake.bnd.registry.azimuth;
 
 import com.cake.azimuth.registration.BehaviourApplicators;
 import com.cake.bnd.foundation.BndMods;
+import com.cake.bnd.foundation.create.BndFlaggedDyeableBehaviour;
 import com.cake.bnd.foundation.create_vault.DyeableVaultBehaviour;
+import com.cake.bnd.registry.core.BndConfigs;
 import com.finchy.pipeorgans.init.AllBlockEntities;
 import com.george_vi.electroenergetics.CEEBlockEntityTypes;
 import com.hlysine.create_connected.registries.CCBlockEntityTypes;
 import com.kipti.bnb.content.decoration.dyeable.DyeableMultiblockTypes;
-import com.kipti.bnb.content.decoration.dyeable.simple.SimpleDyeableBehaviour;
 import com.kipti.bnb.content.decoration.dyeable.tanks.DyeableTankBehaviour;
 import com.kipti.bnb.content.kinetics.cogwheel_chain.behaviour.CogwheelChainBehaviour;
 import com.kipti.bnb.content.kinetics.cogwheel_chain.graph.CogwheelChainCandidate;
 import com.possible_triangle.sliceanddice.index.SDBlockEntities;
 import com.simibubi.create.AllBlockEntityTypes;
 import dev.eriksonn.aeronautics.index.AeroBlockEntityTypes;
+import net.createmod.catnip.config.ConfigBase;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import plus.dragons.createdragonsplus.common.registry.CDPBlockEntities;
 import plus.dragons.createenchantmentindustry.common.registry.CEIBlockEntities;
@@ -48,6 +50,11 @@ public class BndBehaviourApplicators {
             AllBlockEntityTypes.ITEM_DRAIN,
             AllBlockEntityTypes.STEAM_WHISTLE,
             AllBlockEntityTypes.PORTABLE_FLUID_INTERFACE
+        );
+        registerFlaggedDyeable(
+            () -> BndConfigs.common().DYED_LOGISTICS_COMPONENTS,
+            AllBlockEntityTypes.PACKAGE_FROGPORT,
+            AllBlockEntityTypes.REDSTONE_REQUESTER
         );
         BehaviourApplicators.registerForType(
             AllBlockEntityTypes.ITEM_VAULT,
@@ -126,8 +133,13 @@ public class BndBehaviourApplicators {
 
     @SafeVarargs
     private static void registerSimpleDyeable(final Supplier<? extends BlockEntityType<?>>... typeSupplier) {
+        registerFlaggedDyeable(() -> BndConfigs.common().DYED_FLUID_COMPONENTS, typeSupplier);
+    }
+
+    @SafeVarargs
+    private static void registerFlaggedDyeable(final Supplier<ConfigBase.ConfigBool> flag, final Supplier<? extends BlockEntityType<?>>... typeSupplier) {
         BehaviourApplicators.registerForTypes(
-            be -> List.of(new SimpleDyeableBehaviour(be)),
+            be -> List.of(new BndFlaggedDyeableBehaviour(be, flag)),
             typeSupplier
         );
     }

@@ -1,7 +1,7 @@
 package com.cake.bnd.foundation.create_vault;
 
+import com.cake.bnd.registry.core.BndConfigs;
 import com.kipti.bnb.content.decoration.dyeable.BaseDyeableBehaviour;
-import com.kipti.bnb.registry.core.BnbFeatureFlag;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
 import net.minecraft.world.item.DyeColor;
@@ -36,7 +36,7 @@ public class DyeableVaultBehaviour extends BaseDyeableBehaviour {
 
     @Override
     public boolean isDyeingEnabled() {
-        return BnbFeatureFlag.DYEABLE_TANKS.isEnabled();
+        return BndConfigs.common().DYED_VAULTS.get();
     }
 
 }

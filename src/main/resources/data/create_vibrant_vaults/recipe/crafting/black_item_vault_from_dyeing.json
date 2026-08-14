@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "bits_n_dyes:not_suppressed",
+      "category": "logistics_system"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "type": "neoforge:intersection",
+      "children": [
+        {
+          "tag": "create_vibrant_vaults:item_vaults"
+        },
+        {
+          "tag": "create_vibrant_vaults:horizontal_vaults"
+        }
+      ]
+    },
+    {
+      "item": "minecraft:black_dye"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_vibrant_vaults:black_item_vault"
+  }
+}

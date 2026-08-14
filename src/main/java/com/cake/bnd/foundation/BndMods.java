@@ -12,7 +12,8 @@ public enum BndMods {
     CREATE_SLICE_N_DICE("sliceanddice"),
     CREATE_SOUND_OF_STEAM("pipeorgans"),
     CREATE_AERONAUTICS("aeronautics"),
-    CREATE_ELECTRO_ENERGETICS("electroenergetics");
+    CREATE_ELECTRO_ENERGETICS("electroenergetics"),
+    CREATE_VIBRANT_VAULTS("create_vibrant_vaults");
 
     private final String id;
     private final boolean isLoaded;

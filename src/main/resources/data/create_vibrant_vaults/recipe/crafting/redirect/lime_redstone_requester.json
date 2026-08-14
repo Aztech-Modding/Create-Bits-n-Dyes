@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "bits_n_dyes:suppressed",
+      "category": "logistics_system"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "create_vibrant_vaults:lime_stock_link"
+    },
+    "B": {
+      "tag": "c:ingots/iron"
+    },
+    "C": {
+      "tag": "c:dusts/redstone"
+    }
+  },
+  "pattern": [
+    "C",
+    "A",
+    "B"
+  ],
+  "result": {
+    "count": 1,
+    "id": "create:redstone_requester"
+  }
+}

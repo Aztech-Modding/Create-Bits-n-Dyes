@@ -188,7 +188,11 @@ neoForge {
 configurations {
     runtimeClasspath.extendsFrom localRuntime
 }
-
+def compatDependency(String notation) {
+    dependencies.compileOnly(notation)
+    dependencies.add("clientAdditionalRuntimeClasspath", notation)
+    dependencies.add("serverAdditionalRuntimeClasspath", notation)
+}
 dependencies {
     implementation("com.cake.azimuth:azimuth:${azimuth_version}")
     implementation("com.kipti.bnb:bnb:${bnb_version}")
@@ -203,19 +207,40 @@ dependencies {
     //implementation("com.cake.autoload:autoload-neoforge-1.21.1:1.+")
 
     // Actual compats here:
-    implementation("maven.modrinth:create-connected:${create_connected_version}")
-    implementation("maven.modrinth:slice-and-dice:${create_slice_and_dice_version}")
-    implementation("maven.modrinth:create-sound-of-steam:${create_sound_of_steam_version}")
-    implementation("maven.modrinth:create-electro-energetics:${create_electro_energetics_version}")
-    implementation 'thedarkcolour:kotlinforforge-neoforge:5.12.0'
+//    implementation("maven.modrinth:create-connected:${create_connected_version}")
+//    implementation("maven.modrinth:slice-and-dice:${create_slice_and_dice_version}")
+//    implementation("maven.modrinth:create-sound-of-steam:${create_sound_of_steam_version}")
+//    implementation("maven.modrinth:create-electro-energetics:${create_electro_energetics_version}")
+//    implementation("maven.modrinth:apothic-enchanting:${apothic_enchanting_version}") // Slice & Dice runtime dep
+//    implementation("maven.modrinth:apothic-attributes:${apothic_attributes_version}") // Apothic Enchanting dep
+//    implementation("maven.modrinth:placebo:${placebo_version}") // Apothic Enchanting dep
+//    implementation 'thedarkcolour:kotlinforforge-neoforge:5.12.0'
+//
+//    implementation("plus.dragons.createdragonsplus:create-dragons-plus-${minecraft_version}:${create_dragons_plus_version}")
+//    implementation("plus.dragons.createenchantmentindustry:create-enchantment-industry-${minecraft_version}:${create_enchantment_industry_version}")
+//
+//    implementation "dev.eriksonn.aeronautics:aeronautics-neoforge-1.21.1:$aeronautics_version"
+//    implementation "dev.simulated_team.simulated:simulated-neoforge-1.21.1:$simulated_version"
+//    implementation "dev.ryanhcode.sable:sable-neoforge-1.21.1:$sable_version"
+//    implementation "dev.ryanhcode.offroad:offroad-neoforge-1.21.1:$offroad_version"
 
-    implementation("plus.dragons.createdragonsplus:create-dragons-plus-${minecraft_version}:${create_dragons_plus_version}")
-    implementation("plus.dragons.createenchantmentindustry:create-enchantment-industry-${minecraft_version}:${create_enchantment_industry_version}")
+    compileOnly("maven.modrinth:create-connected:${create_connected_version}")
+    compileOnly("maven.modrinth:create-vibrant-vaults:${create_vibrant_vaults_version}")
+    compileOnly("maven.modrinth:slice-and-dice:${create_slice_and_dice_version}")
+    compileOnly("maven.modrinth:create-sound-of-steam:${create_sound_of_steam_version}")
+    compileOnly("maven.modrinth:create-electro-energetics:${create_electro_energetics_version}")
+    compileOnly("maven.modrinth:apothic-enchanting:${apothic_enchanting_version}") // Slice & Dice runtime dep
+    compileOnly("maven.modrinth:apothic-attributes:${apothic_attributes_version}") // Apothic Enchanting dep
+    compileOnly("maven.modrinth:placebo:${placebo_version}") // Apothic Enchanting dep
+    compileOnly 'thedarkcolour:kotlinforforge-neoforge:5.12.0'
 
-    implementation "dev.eriksonn.aeronautics:aeronautics-neoforge-1.21.1:$aeronautics_version"
-    implementation "dev.simulated_team.simulated:simulated-neoforge-1.21.1:$simulated_version"
-    implementation "dev.ryanhcode.sable:sable-neoforge-1.21.1:$sable_version"
-    implementation "dev.ryanhcode.offroad:offroad-neoforge-1.21.1:$offroad_version"
+    compileOnly("plus.dragons.createdragonsplus:create-dragons-plus-${minecraft_version}:${create_dragons_plus_version}")
+    compileOnly("plus.dragons.createenchantmentindustry:create-enchantment-industry-${minecraft_version}:${create_enchantment_industry_version}")
+
+    compileOnly "dev.eriksonn.aeronautics:aeronautics-neoforge-1.21.1:$aeronautics_version"
+    compileOnly "dev.simulated_team.simulated:simulated-neoforge-1.21.1:$simulated_version"
+    compileOnly "dev.ryanhcode.sable:sable-neoforge-1.21.1:$sable_version"
+    compileOnly "dev.ryanhcode.offroad:offroad-neoforge-1.21.1:$offroad_version"
 
     runtimeOnly "mezz.jei:jei-1.21.1-neoforge:19.39.0.370"
 }

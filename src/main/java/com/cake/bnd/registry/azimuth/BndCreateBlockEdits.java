@@ -3,6 +3,7 @@ package com.cake.bnd.registry.azimuth;
 import com.cake.azimuth.foundation.preconstruct.AzPreConstructEventListener;
 import com.cake.azimuth.registration.event.RegisterCreateBlockEditsEvent;
 import com.cake.bnd.foundation.BndMods;
+import com.cake.bnd.foundation.create.SimpleDyeableRedstoneRequesterItem;
 import com.cake.bnd.registry.client.BndSpriteShifts;
 import com.kipti.bnb.content.decoration.dyeable.simple.SimpleDyeableBlockItem;
 import com.kipti.bnb.content.decoration.dyeable.simple.SimpleDyeableModelWrapper;
@@ -10,9 +11,12 @@ import com.kipti.bnb.registry.client.BnbSpriteShifts;
 import com.simibubi.create.Create;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.builders.BlockBuilder;
+import com.tterrag.registrate.util.nullness.NonNullBiFunction;
 import net.createmod.catnip.render.SpriteShiftEntry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 import java.util.Map;
@@ -57,6 +61,17 @@ public class BndCreateBlockEdits {
             Create.asResource("portable_fluid_interface"),
             BndSpriteShifts.DYED_COPPER_UNDERSIDE,
             BndSpriteShifts.DYED_PORTABLE_FLUID_INTERFACE
+        );
+        editSimpleDyeable(event,
+            Create.asResource("package_frogport"),
+            BndSpriteShifts.DYED_PORT
+        );
+        editSimpleDyeable(event,
+            Create.asResource("redstone_requester"),
+            SimpleDyeableRedstoneRequesterItem::new,
+            BndSpriteShifts.DYED_REDSTONE_REQUESTER,
+            BndSpriteShifts.DYED_REDSTONE_REQUESTER_POWERED,
+            BndSpriteShifts.DYED_REDSTONE_REQUESTER_UNPOWERED
         );
     }
 
@@ -148,7 +163,12 @@ public class BndCreateBlockEdits {
 
     @SafeVarargs
     private static void editSimpleDyeable(final RegisterCreateBlockEditsEvent event, final ResourceLocation id, final Map<DyeColor, SpriteShiftEntry>... dyedSpriteShifts) {
-        event.forBlockItem(id, SimpleDyeableBlockItem::new);
+        editSimpleDyeable(event, id, SimpleDyeableBlockItem::new, dyedSpriteShifts);
+    }
+
+    @SafeVarargs
+    private static void editSimpleDyeable(final RegisterCreateBlockEditsEvent event, final ResourceLocation id, final NonNullBiFunction<Block, Item.Properties, ? extends BlockItem> itemFactory, final Map<DyeColor, SpriteShiftEntry>... dyedSpriteShifts) {
+        event.forBlockItem(id, itemFactory);
         event.forBlock(
             id,
             builder -> ((BlockBuilder<Block, CreateRegistrate>) builder).onRegister(CreateRegistrate.blockModel(

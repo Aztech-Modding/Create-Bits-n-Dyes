@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "bits_n_dyes:not_suppressed",
+      "category": "logistics_system"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "create_vibrant_vaults:frogports"
+    },
+    {
+      "item": "minecraft:gray_dye"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_vibrant_vaults:gray_package_frogport"
+  }
+}

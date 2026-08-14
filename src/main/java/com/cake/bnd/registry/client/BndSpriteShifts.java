@@ -8,29 +8,25 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 public class BndSpriteShifts {
 
-    public static final Map<BndMods, String> DIRECTORY_TO_LOAD_FOR_MOD = Map.of(
-            BndMods.CREATE,
-            "block_shift/create",
-            BndMods.CREATE_AERONAUTICS,
-            "block_shift/create_aeronauticus",
-            BndMods.CREATE_CONNECTED,
-            "block_shift/create_connected",
-            BndMods.CREATE_DRAGONS_PLUS,
-            "block_shift/create_dragons_plus",
-            BndMods.CREATE_ELECTRO_ENERGETICS,
-            "block_shift/create_electro_energetics",
-            BndMods.CREATE_ENCHANTMENT_INDUSTRY,
-            "block_shift/create_enchantment_industry",
-            BndMods.CREATE_SLICE_N_DICE,
-            "block_shift/create_slice_n_dice"
+    public static final Map<BndMods, String> DIRECTORY_TO_LOAD_FOR_MOD = Map.ofEntries(
+            Map.entry(BndMods.CREATE, "block_shift/create"),
+            Map.entry(BndMods.CREATE_AERONAUTICS, "block_shift/create_aeronauticus"),
+            Map.entry(BndMods.CREATE_CONNECTED, "block_shift/create_connected"),
+            Map.entry(BndMods.CREATE_DRAGONS_PLUS, "block_shift/create_dragons_plus"),
+            Map.entry(BndMods.CREATE_ELECTRO_ENERGETICS, "block_shift/create_electro_energetics"),
+            Map.entry(BndMods.CREATE_ENCHANTMENT_INDUSTRY, "block_shift/create_enchantment_industry"),
+            Map.entry(BndMods.CREATE_SLICE_N_DICE, "block_shift/create_slice_n_dice"),
+            Map.entry(BndMods.CREATE_VIBRANT_VAULTS, "block_shift/create_vibrant_vaults")
     );
-
     public static final Map<DyeColor, SpriteShiftEntry> DYED_FLUID_TANK = getDyedSpriteShifts(
         "fluid_tank",
         "create/fluid_tank"
@@ -136,6 +132,26 @@ public class BndSpriteShifts {
         "create/portable_fluid_interface"
     );
 
+    public static final Map<DyeColor, SpriteShiftEntry> DYED_PORT = getDyedSpriteShifts(
+        "port",
+        "create/port"
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> DYED_REDSTONE_REQUESTER = getDyedSpriteShifts(
+        "redstone_requester",
+        "create/redstone_requester"
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> DYED_REDSTONE_REQUESTER_POWERED = getDyedSpriteShifts(
+        "redstone_requester_powered",
+        "create/redstone_requester_powered"
+    );
+
+    public static final Map<DyeColor, SpriteShiftEntry> DYED_REDSTONE_REQUESTER_UNPOWERED = getDyedSpriteShifts(
+        "redstone_requester_unpowered",
+        "create/redstone_requester_unpowered"
+    );
+
     public static final Map<DyeColor, SpriteShiftEntry> DYED_SPOUT = getDyedSpriteShifts(
         "spout",
         "create/spout"
@@ -159,6 +175,8 @@ public class BndSpriteShifts {
         "create_connected/fluid_container_window_single",
         BndMods.CREATE_CONNECTED
     );
+
+    public static final List<Function<DyeColor, SpriteShiftEntry>> CVV_DYED_VERTICAL_VAULT_SHIFTS = getDyedVerticalVaultShifts();
 
     public static final Map<DyeColor, SpriteShiftEntry> CDP_DYED_FLUID_HATCH = getDyedSpriteShiftsIfModInstalled(
         "create_dragons_plus",
@@ -322,6 +340,34 @@ public class BndSpriteShifts {
             );
         }
         return Collections.unmodifiableMap(map);
+    }
+
+    private static List<Function<DyeColor, SpriteShiftEntry>> getDyedVerticalVaultShifts() {
+        if (!BndMods.CREATE_VIBRANT_VAULTS.isLoaded()) {
+            return List.of();
+        }
+
+        final List<Function<DyeColor, SpriteShiftEntry>> shifts = new ArrayList<>();
+        for (final String size : new String[] { "small", "medium", "large" }) {
+            for (final String part : new String[] { "top", "side" }) {
+                final ResourceLocation original = ResourceLocation.fromNamespaceAndPath(
+                    BndMods.CREATE_VIBRANT_VAULTS.id(),
+                    "block/vertical_item_vault/base/vault_" + part + "_" + size
+                );
+                final SpriteShiftEntry[] entriesByDyeColor = new SpriteShiftEntry[DyeColor.values().length];
+                for (final DyeColor dyeColor : DyeColor.values()) {
+                    entriesByDyeColor[dyeColor.getId()] = SpriteShifter.get(
+                        original,
+                        ResourceLocation.fromNamespaceAndPath(
+                            CreateBitsnDyes.MOD_ID,
+                            "block_shift/create_vibrant_vaults/vault_" + part + "_" + size + "/vault_" + part + "_" + size + "_" + dyeColor.getName()
+                        )
+                    );
+                }
+                shifts.add(dyeColor -> entriesByDyeColor[dyeColor.getId()]);
+            }
+        }
+        return List.copyOf(shifts);
     }
 
     public static void register() {

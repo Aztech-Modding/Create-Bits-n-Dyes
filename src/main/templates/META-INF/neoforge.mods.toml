@@ -37,14 +37,19 @@ config="${mod_id}.mixins.json"
 [[dependencies.${mod_id}]]
     modId="azimuth"
     type="required"
-    versionRange="[1.2.0,)"
+    versionRange="[1.4.6,)"
     ordering="AFTER"
     side="BOTH"
 
 [[dependencies.${mod_id}]]
     modId="bits_n_bobs"
     type="required"
-    versionRange="[2.2.3,)"
+    versionRange="[2.2.4,)"
     ordering="AFTER"
     side="BOTH"
 
+[[dependencies.${mod_id}]]
+    modId="create_vibrant_vaults"
+    type="optional"
+    ordering="AFTER"
+    side="BOTH"

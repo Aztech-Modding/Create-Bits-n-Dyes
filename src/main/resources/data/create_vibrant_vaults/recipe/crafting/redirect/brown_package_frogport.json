@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "bits_n_dyes:suppressed",
+      "category": "logistics_system"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "create_vibrant_vaults:brown_vaults"
+    },
+    "B": {
+      "tag": "c:slimeballs"
+    },
+    "C": {
+      "item": "create:andesite_alloy"
+    }
+  },
+  "pattern": [
+    "B",
+    "A",
+    "C"
+  ],
+  "result": {
+    "count": 1,
+    "id": "create:package_frogport"
+  }
+}

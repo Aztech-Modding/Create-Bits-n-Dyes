@@ -19,7 +19,7 @@ public class BndSpriteShifts {
 
     public static final Map<BndMods, String> DIRECTORY_TO_LOAD_FOR_MOD = Map.ofEntries(
             Map.entry(BndMods.CREATE, "block_shift/create"),
-            Map.entry(BndMods.CREATE_AERONAUTICS, "block_shift/create_aeronauticus"),
+            Map.entry(BndMods.CREATE_AERONAUTICS, "block_shift/create_aeronautics"),
             Map.entry(BndMods.CREATE_CONNECTED, "block_shift/create_connected"),
             Map.entry(BndMods.CREATE_DRAGONS_PLUS, "block_shift/create_dragons_plus"),
             Map.entry(BndMods.CREATE_ELECTRO_ENERGETICS, "block_shift/create_electro_energetics"),

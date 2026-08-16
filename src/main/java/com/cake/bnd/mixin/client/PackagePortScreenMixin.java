@@ -27,7 +27,7 @@ public abstract class PackagePortScreenMixin extends AbstractSimiContainerScreen
         super(container, inv, title);
     }
 
-    @WrapOperation(method = "renderBg", at = @At(value = "INVOKE", target = "Lnet/createmod/catnip/gui/element/GuiGameElement;of(Lnet/minecraft/world/item/ItemStack;)Lnet/createmod/catnip/gui/element/GuiGameElement$GuiRenderBuilder;"))
+    @WrapOperation(method = "renderBg", at = @At(value = "INVOKE", ordinal = 0, target = "Lnet/createmod/catnip/gui/element/GuiGameElement;of(Lnet/minecraft/world/item/ItemStack;)Lnet/createmod/catnip/gui/element/GuiGameElement$GuiRenderBuilder;"))
     private GuiGameElement.GuiRenderBuilder bnd$dyeFrogportIcon(final ItemStack stack, final Operation<GuiGameElement.GuiRenderBuilder> original) {
         if (menu.contentHolder instanceof final FrogportBlockEntity frogport) {
             final DyeColor color = SimpleDyeableBehaviour.getDyeColor(frogport);

@@ -3,6 +3,7 @@ package com.cake.bnd.registry.azimuth;
 import com.cake.azimuth.foundation.preconstruct.AzPreConstructEventListener;
 import com.cake.azimuth.registration.event.RegisterCreateBlockEditsEvent;
 import com.cake.bnd.foundation.BndMods;
+import com.cake.bnd.foundation.create.SimpleDyeablePackagePortItem;
 import com.cake.bnd.foundation.create.SimpleDyeableRedstoneRequesterItem;
 import com.cake.bnd.registry.client.BndSpriteShifts;
 import com.kipti.bnb.content.decoration.dyeable.simple.SimpleDyeableBlockItem;
@@ -64,6 +65,7 @@ public class BndCreateBlockEdits {
         );
         editSimpleDyeable(event,
             Create.asResource("package_frogport"),
+            SimpleDyeablePackagePortItem::new,
             BndSpriteShifts.DYED_PORT
         );
         editSimpleDyeable(event,

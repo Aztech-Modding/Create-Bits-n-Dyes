@@ -23,3 +23,11 @@
 - Added vivid vaults texture pack for more saturated vault palette colors
 - Added compat with Create: Vibrant Vaults
 - Added dyeable functionality for Frogports and Redstone Requester
+
+# 1.21.1-1.1.1
+
+- Reduced neoforge version requirement
+
+# 1.21.1-1.1.2
+
+- Fix frogport item not working

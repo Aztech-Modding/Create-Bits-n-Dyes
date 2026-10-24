@@ -1,6 +1,7 @@
 package com.cake.bnd.foundation.create_sound_of_steam;
 
 import com.finchy.pipeorgans.content.pipes.generic.GenericPipeBlockItem;
+import com.finchy.pipeorgans.content.pipes.generic.StopSize;
 import com.kipti.bnb.content.decoration.dyeable.DyeableBlockItemHelper;
 import com.kipti.bnb.content.decoration.dyeable.simple.SimpleDyeableBehaviour;
 import net.minecraft.core.BlockPos;

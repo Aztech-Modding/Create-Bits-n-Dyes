@@ -6,6 +6,7 @@ import com.cake.bnd.registry.client.DyedFrogportGuiElement;
 import com.kipti.bnb.content.decoration.dyeable.simple.SimpleDyeableBehaviour;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.logistics.packagePort.PackagePortMenu;
 import com.simibubi.create.content.logistics.packagePort.PackagePortScreen;
 import com.simibubi.create.content.logistics.packagePort.frogport.FrogportBlockEntity;
@@ -32,7 +33,7 @@ public abstract class PackagePortScreenMixin extends AbstractSimiContainerScreen
         if (menu.contentHolder instanceof final FrogportBlockEntity frogport) {
             final DyeColor color = SimpleDyeableBehaviour.getDyeColor(frogport);
             if (color != null) {
-                return new DyedFrogportGuiElement(BndPartialModels.FROGPORT_ITEM, frogport.getBlockState(), BndSpriteShifts.DYED_PORT.get(color));
+                return new DyedFrogportGuiElement(BndPartialModels.FROGPORT_BLOCK, AllPartialModels.FROGPORT_HEAD, AllPartialModels.FROGPORT_BODY, frogport.getBlockState(), BndSpriteShifts.DYED_PORT.get(color));
             }
         }
         return original.call(stack);

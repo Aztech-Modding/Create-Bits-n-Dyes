@@ -1,4 +1,4 @@
-package com.cake.bnd.registry.datagen;
+package com.cake.bnd.registry.data;
 
 import com.cake.bnd.CreateBitsnDyes;
 import com.cake.bnd.foundation.config.conditions.BndNotSuppressingCondition;

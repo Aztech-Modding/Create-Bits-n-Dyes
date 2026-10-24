@@ -16,12 +16,16 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class DyedFrogportGuiElement extends GuiGameElement.GuiRenderBuilder {
 
-    private final PartialModel partialModel;
+    private final PartialModel frogportBase;
+    private final PartialModel frogportHead;
+    private final PartialModel frogportBody;
     private final BlockState blockState;
     private final SpriteShiftEntry spriteShift;
 
-    public DyedFrogportGuiElement(final PartialModel partialModel, final BlockState blockState, final SpriteShiftEntry spriteShift) {
-        this.partialModel = partialModel;
+    public DyedFrogportGuiElement(final PartialModel frogportBase, PartialModel frogportHead, PartialModel frogportBody, final BlockState blockState, final SpriteShiftEntry spriteShift) {
+        this.frogportBase = frogportBase;
+        this.frogportHead = frogportHead;
+        this.frogportBody = frogportBody;
         this.blockState = blockState;
         this.spriteShift = spriteShift;
     }
@@ -31,7 +35,15 @@ public class DyedFrogportGuiElement extends GuiGameElement.GuiRenderBuilder {
         final PoseStack pose = graphics.pose();
         prepareMatrix(pose);
 
-        if (partialModel.get() == null) {
+        if (frogportBase.get() == null) {
+            cleanUpMatrix(pose);
+            return;
+        }
+        if (frogportHead.get() == null) {
+            cleanUpMatrix(pose);
+            return;
+        }
+        if (frogportBody.get() == null) {
             cleanUpMatrix(pose);
             return;
         }
@@ -43,15 +55,26 @@ public class DyedFrogportGuiElement extends GuiGameElement.GuiRenderBuilder {
         pose.translate(0, 0, 100);
         pose.translate(8, -8, 0);
         pose.scale(16, 16, 16);
-        partialModel.get().getTransforms()
+        BndPartialModels.FROGPORT_ITEM.get().getTransforms()
             .getTransform(ItemDisplayContext.GUI)
             .apply(false, pose);
         pose.translate(-0.5F, -0.5F, -0.5F);
 
-        final SuperByteBuffer buffer = SimpleDyeablePartialHelper.apply(CachedBuffers.partial(partialModel, blockState), spriteShift)
+        SuperByteBuffer buffer = SimpleDyeablePartialHelper.apply(CachedBuffers.partial(frogportHead, blockState), spriteShift)
             .light(0xF000F0);
         buffer.renderInto(pose, graphics.bufferSource()
             .getBuffer(RenderType.cutout()));
+
+        buffer = SimpleDyeablePartialHelper.apply(CachedBuffers.partial(frogportBody, blockState), spriteShift)
+                .light(0xF000F0);
+        buffer.renderInto(pose, graphics.bufferSource()
+                .getBuffer(RenderType.cutout()));
+
+        buffer = CachedBuffers.partial(frogportBase, blockState)
+                .light(0xF000F0);
+        buffer.renderInto(pose, graphics.bufferSource()
+                .getBuffer(RenderType.cutout()));
+
         graphics.bufferSource()
             .endBatch();
 

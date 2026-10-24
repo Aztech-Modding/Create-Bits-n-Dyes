@@ -53,3 +53,10 @@ config="${mod_id}.mixins.json"
     type="optional"
     ordering="AFTER"
     side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="pipeorgans"
+    type="optional"
+    ordering="AFTER"
+    side="BOTH"
+    versionRange="[0.9.2.1,)"

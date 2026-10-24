@@ -21,6 +21,8 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(FrogportVisual.class)
 public abstract class FrogportVisualMixin extends AbstractBlockEntityVisual<FrogportBlockEntity> {
@@ -58,9 +60,18 @@ public abstract class FrogportVisualMixin extends AbstractBlockEntityVisual<Frog
         return original.call(instance, BnbInstanceTypes.SHIFT_TRANSFORMED, model);
     }
 
-    @WrapOperation(method = "animate", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/logistics/packagePort/frogport/FrogportVisual;updateGoggles()V"))
-    private void bnd$applyDyeColor(FrogportVisual instance, Operation<Void> original) {
-        original.call(instance);
+    @Inject(method = "updateGoggles", at = @At(value = "INVOKE", ordinal = 1, target = "Lcom/simibubi/create/content/logistics/packagePort/frogport/FrogportVisual;updateLight(F)V"))
+    protected void bnd$shiftPlainHeadWithDye(CallbackInfo ci) {
+        final DyeColor color = SimpleDyeableBehaviour.getDyeColor(this.blockEntity);
+        final SpriteShiftEntry shift = color == null ? null : BndSpriteShifts.DYED_PORT.get(color);
+        if (this.head instanceof final ShiftTransformedInstance shiftHead) {
+            shiftHead.setSpriteShift(shift)
+                    .setChanged();
+        }
+    }
+
+    @Inject(method = "animate", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/logistics/packagePort/frogport/FrogportVisual;updateGoggles()V"))
+    private void bnd$applyDyeColor(float partialTicks, CallbackInfo ci) {
         final DyeColor color = SimpleDyeableBehaviour.getDyeColor(this.blockEntity);
         final SpriteShiftEntry shift = color == null ? null : BndSpriteShifts.DYED_PORT.get(color);
         if (bnd$lastDyeColor != color) {

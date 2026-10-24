@@ -3,6 +3,7 @@ package com.cake.bnd.mixin.sound_of_steam;
 import com.cake.azimuth.registration.CreateBlockEdits;
 import com.cake.bnd.foundation.create_sound_of_steam.SimpleDyeableGenericPipeBlockItem;
 import com.finchy.pipeorgans.content.pipes.generic.GenericPipeBlockItem;
+import com.finchy.pipeorgans.content.pipes.generic.StopSize;
 import com.finchy.pipeorgans.init.AllBlocks;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -26,8 +27,13 @@ import java.util.function.Consumer;
 @Mixin(AllBlocks.class)
 public class SoundOfSteamAllBlocksMixin {
 
-    @Redirect(method = "lambda$registerPipeBlock$32", at = @At(value = "NEW", target = "(Lnet/minecraft/world/level/block/Block;Lnet/minecraft/world/item/Item$Properties;Lcom/finchy/pipeorgans/content/pipes/generic/GenericPipeBlockItem$StopSize;)Lcom/finchy/pipeorgans/content/pipes/generic/GenericPipeBlockItem;"))
-    private static GenericPipeBlockItem bnd$replaceSoundOfSteamItem(final Block pBlock, final Item.Properties pProperties, final GenericPipeBlockItem.StopSize stopSize) {
+    @Redirect(method = "lambda$registerPipeBlock$45", at = @At(value = "NEW", target = "(Lnet/minecraft/world/level/block/Block;Lnet/minecraft/world/item/Item$Properties;Lcom/finchy/pipeorgans/content/pipes/generic/StopSize;)Lcom/finchy/pipeorgans/content/pipes/generic/GenericPipeBlockItem;"))
+    private static GenericPipeBlockItem bnd$replaceSoundOfSteamItem45(Block pBlock, Item.Properties pProperties, StopSize stopSize) {
+        return new SimpleDyeableGenericPipeBlockItem(pBlock, pProperties, stopSize);
+    }
+
+    @Redirect(method = "lambda$registerPipeBlock$46", at = @At(value = "NEW", target = "(Lnet/minecraft/world/level/block/Block;Lnet/minecraft/world/item/Item$Properties;Lcom/finchy/pipeorgans/content/pipes/generic/StopSize;)Lcom/finchy/pipeorgans/content/pipes/generic/GenericPipeBlockItem;"))
+    private static GenericPipeBlockItem bnd$replaceSoundOfSteamItem46(Block pBlock, Item.Properties pProperties, StopSize stopSize) {
         return new SimpleDyeableGenericPipeBlockItem(pBlock, pProperties, stopSize);
     }
 

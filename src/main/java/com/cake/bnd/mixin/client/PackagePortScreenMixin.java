@@ -1,7 +1,6 @@
 package com.cake.bnd.mixin.client;
 
 import com.cake.bnd.registry.client.BndPartialModels;
-import com.cake.bnd.registry.client.BndSpriteShifts;
 import com.cake.bnd.registry.client.DyedFrogportGuiElement;
 import com.kipti.bnb.content.decoration.dyeable.simple.SimpleDyeableBehaviour;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -33,7 +32,13 @@ public abstract class PackagePortScreenMixin extends AbstractSimiContainerScreen
         if (menu.contentHolder instanceof final FrogportBlockEntity frogport) {
             final DyeColor color = SimpleDyeableBehaviour.getDyeColor(frogport);
             if (color != null) {
-                return new DyedFrogportGuiElement(BndPartialModels.FROGPORT_BLOCK, AllPartialModels.FROGPORT_HEAD, AllPartialModels.FROGPORT_BODY, frogport.getBlockState(), BndSpriteShifts.DYED_PORT.get(color));
+                return new DyedFrogportGuiElement(
+                        BndPartialModels.FROGPORT_BLOCK,
+                        frogport.goggles ? AllPartialModels.FROGPORT_HEAD_GOGGLES : AllPartialModels.FROGPORT_HEAD,
+                        AllPartialModels.FROGPORT_BODY,
+                        frogport.getBlockState(),
+                        color
+                );
             }
         }
         return original.call(stack);

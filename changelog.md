@@ -31,3 +31,8 @@
 # 1.21.1-1.1.2
 
 - Fix frogport item not working
+
+# 1.21.1-1.1.3
+
+- Fix frogport goggle display
+  - Fix latest sound of steam incompatibility

@@ -1,6 +1,7 @@
 package com.cake.bnd;
 
 import com.cake.azimuth.Azimuth;
+import com.cake.bnd.registry.client.BndFrogportModels;
 import com.cake.bnd.registry.client.BndPartialModels;
 import com.cake.bnd.registry.client.BndSpriteShifts;
 import com.cake.bnd.registry.core.BndConfigs;
@@ -33,6 +34,8 @@ public class CreateBitsnDyesClient {
     }
 
     private static void clientInit() {
+        BndFrogportModels.register();
+
         BaseConfigScreen.setDefaultActionFor(
                 CreateBitsnDyes.MOD_ID, base -> base
                         .withButtonLabels(null, "Feature Settings", null)

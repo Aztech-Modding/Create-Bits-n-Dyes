@@ -1,16 +1,15 @@
 package com.cake.bnd.registry.client;
 
-import com.kipti.bnb.content.decoration.dyeable.simple.SimpleDyeablePartialHelper;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.createmod.catnip.gui.element.GuiGameElement;
 import net.createmod.catnip.render.CachedBuffers;
-import net.createmod.catnip.render.SpriteShiftEntry;
 import net.createmod.catnip.render.SuperByteBuffer;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -20,14 +19,14 @@ public class DyedFrogportGuiElement extends GuiGameElement.GuiRenderBuilder {
     private final PartialModel frogportHead;
     private final PartialModel frogportBody;
     private final BlockState blockState;
-    private final SpriteShiftEntry spriteShift;
+    private final DyeColor color;
 
-    public DyedFrogportGuiElement(final PartialModel frogportBase, PartialModel frogportHead, PartialModel frogportBody, final BlockState blockState, final SpriteShiftEntry spriteShift) {
+    public DyedFrogportGuiElement(final PartialModel frogportBase, final PartialModel frogportHead, final PartialModel frogportBody, final BlockState blockState, final DyeColor color) {
         this.frogportBase = frogportBase;
         this.frogportHead = frogportHead;
         this.frogportBody = frogportBody;
         this.blockState = blockState;
-        this.spriteShift = spriteShift;
+        this.color = color;
     }
 
     @Override
@@ -60,12 +59,12 @@ public class DyedFrogportGuiElement extends GuiGameElement.GuiRenderBuilder {
             .apply(false, pose);
         pose.translate(-0.5F, -0.5F, -0.5F);
 
-        SuperByteBuffer buffer = SimpleDyeablePartialHelper.apply(CachedBuffers.partial(frogportHead, blockState), spriteShift)
+        SuperByteBuffer buffer = BndFrogportModels.buffer(frogportHead, blockState, color)
             .light(0xF000F0);
         buffer.renderInto(pose, graphics.bufferSource()
             .getBuffer(RenderType.cutout()));
 
-        buffer = SimpleDyeablePartialHelper.apply(CachedBuffers.partial(frogportBody, blockState), spriteShift)
+        buffer = BndFrogportModels.buffer(frogportBody, blockState, color)
                 .light(0xF000F0);
         buffer.renderInto(pose, graphics.bufferSource()
                 .getBuffer(RenderType.cutout()));
